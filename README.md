@@ -1,7 +1,6 @@
 # Simple Crypter
-This a PoC for education purposes only to explore the techniques known as Process Hollowing or RunPE.
-It builds a stub program with an encrypted payload. Once this stub is ran, it will decrypt the data in-memory and spawn a new process of itself and replace the image with the payload, for a better overview of this check out this article (![Runtime-Crypter]https://www.codeproject.com/Articles/1174823/Cplusplus-Runtime-Crypter).
-These techniques are very frequent for hiding malicious code from most Anti-Virus(AV's) because the actual malicious code will only ne decrypted in memory and most AV's only check the disk for known patterns. 
+This a PoC for education purposes only to explore the techniques known as Process Hollowing or RunPE used by some malicous actors to hide code from anti-virus because the actual malicious code will only be decrypted in memory and most AV's only check the disk for known patterns.<br>
+It builds a stub program with an encrypted payload. Once this stub is ran, it will decrypt the data in-memory and spawn a new process of itself and replace the image with the payload, for a better overview of this check out this article ([Runtime-Crypter](https://www.codeproject.com/Articles/1174823/Cplusplus-Runtime-Crypter)).
 
 
 # Structure
@@ -39,6 +38,3 @@ Examples:
 https://www.codeproject.com/Articles/1174823/Cplusplus-Runtime-Crypter
 https://github.com/codecrack3/Run-PE---Run-Portable-Executable-From-Memory/blob/master/RunPE.cpp
 https://gist.github.com/valinet/e27e64927db330b808c3a714c5165b0a
-
-# Console app to windows app
-https://stackoverflow.com/questions/3884124/convert-a-console-app-to-a-windows-app#:~:text=2%20Answers&text=is%20not%20useful-,Show%20activity%20on%20this%20post.,()%20method%20to%20WinMain()%20.
