@@ -31,7 +31,6 @@ Examples:
 
 
 ## TODO:
-- Delete some preprocessor defines on the Builder project
 - Test for x86
 
 # Resources
