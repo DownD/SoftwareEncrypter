@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TargetConfig Name="WINLABVM" LastUsed="2021-01-01T00:00:00.0000000Z">
+  <EngineConfig />
+  <EngineOptions>
+    <Property name="InitialBreak" value="false" />
+    <Property name="Elevate" value="false" />
+  </EngineOptions>
+  <TargetOptions>
+    <Option name="KernelConnect">
+      <Property name="ConnectionString" value="com:port=\\.\pipe\WINLABVM,baud=115200,pipe,reconnect" />
+      <Property name="ConnectionType" value="Default" />
+      <Property name="QuietMode" value="false" />
+      <Property name="InitialBreak" value="false" />
+    </Option>
+    <Option name="RestoreBreakpoints">
+      <Property name="Breakpoints" />
+    </Option>
+    <Option name="RestoreCommandHistory">
+      <Property name="History" />
+    </Option>
+  </TargetOptions>
+</TargetConfig>

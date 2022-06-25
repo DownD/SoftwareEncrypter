@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ConsoleApplication1.exe
+/a.exe
+
+TestVM/Windows.iso
+tmp/
