@@ -13,10 +13,10 @@ IF "%2" == "" (SET crypted_file=".\tmp\encrypted_binary.exe") ELSE (SET crypted_
 .\x64\Release\Builder.exe %unencrypted_file% .\tmp\crypted.exe || echo Error encrypting file &&  goto :error
 
 :: Build stub - Make sure to build with develoepr command tools of visual studio
-msbuild Crypter.sln /t:Stub /p:Configuration="Release" /p:Platform="x64" || echo Error building project && goto :error
+msbuild Crypter.sln /t:Stub /p:Configuration="Debug" /p:Platform="x64" || echo Error building project && goto :error
 
 :: Copy to destination directory
-move .\x64\Release\Stub.exe %crypted_file%  || echo Error encrypted stub && goto :error
+move .\x64\Debug\Stub.exe %crypted_file%  || echo Error encrypted stub && goto :error
 :: del .\tmp\crypted.exe  || echo "Error deleting temporary files"
 
 echo Success the final binary has been placed at %crypted_file%

@@ -169,6 +169,12 @@ bool processDoppelganging(void* image, const char* currentFilePath) {
 		return false;
 	}
 
+	if (NtHeader->FileHeader.Machine != IMAGE_FILE_MACHINE_AMD64) // Check if image is a PE File.
+	{
+		PRINT_ERROR("Only 64 bit images are supported. Current image has the code 0x%#x",NtHeader->FileHeader.Machine);
+		return false;
+	}
+
 	// Create a new instance of current process
 	if (!CreateProcessA(currentFilePath, NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &SI, &PI)) {
 		PRINT_ERROR("Error creating new process");
@@ -192,6 +198,8 @@ bool processDoppelganging(void* image, const char* currentFilePath) {
 	VirtualAllocEx(PI.hProcess, LPVOID(NtHeader->OptionalHeader.ImageBase), NtHeader->OptionalHeader.SizeOfHeaders, MEM_COMMIT, PAGE_READWRITE);
 
 	PRINT_INFO("ImageBase: %p", pImageBase);
+	PRINT_INFO("Preferred ImageBase: %p", NtHeader->OptionalHeader.ImageBase);
+	PRINT_INFO("Image Size: %d", NtHeader->OptionalHeader.SizeOfImage);
 
 	if (!pImageBase) {
 		PRINT_ERROR("Error allocating memory on target process");

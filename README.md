@@ -53,7 +53,7 @@ https://www.youtube.com/watch?v=9h1FsOISwX0 - Hello World Driver
 Machine Shared Folder: \\169.254.41.38\pub
 Machine Name: WINLABVM
 
-# Depenencies
+# Dependencies
 vcpkg install minhook:x64-windows-static
 
 # Console app to windows app
