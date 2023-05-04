@@ -3,7 +3,7 @@ This a PoC for education purposes only to explore the techniques known as Proces
 
 It builds a stub program with an encrypted payload. Once this stub is ran, it will decrypt the data in-memory and spawn a new process of itself and replace the image with the payload, for a better overview of this check out this article ([Runtime-Crypter](https://www.codeproject.com/Articles/1174823/Cplusplus-Runtime-Crypter)).
 
-These techniques are very frequent for hiding malicious code from anti-virus and also for preventing unauthorized access from reading and changing the code.
+These techniques are very frequent for hiding malicious code and also for preventing reverse engineering.
 
 # Structure
 - Builder - The binary that will encrypt the payload.
