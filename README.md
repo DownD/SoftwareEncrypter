@@ -11,18 +11,18 @@ These techniques are very frequent for hiding malicious code and also for preven
 - build_64.bat - Script that is responsible for building the encrypted payload and embed it into the Stub. 
 
 # How it works
-- Builder.exe
-The Builder.exe is responsible for taking a payload and encrypt with XOR encryption.
+- *Builder.exe*\
+The Builder.exe is responsible for taking a payload and encrypt with XOR encryption.\
 To do this just run Builder.exe and follow the steps, it also supports 2 additional arguments (path of the payload, final path of the encrypted payload).
 ATTENTION: This program just encrypts the entire binary, you won't be able to run the produced file, that will be the job of the Stub.exe.
-- - Example: ```Builder.exe .\payload.exe .\encrypted_payload.exe```
+  - Example: ```Builder.exe .\payload.exe .\encrypted_payload.exe```
 
-- Stub.exe
-This is the final binary that will be build using the encrypted payload as resource file and later on decrypting the payload in memory and use the technique called "Process Hollowing" to run a new process with the payload.
-This uses a variant Processing Hollowing, it creates another process, copy of itself in suspended mode, map's the encrypted file without unmapping the original, finally it load's a shellcode to fix relocations/imports and redirects the entry point to the mapped payload by patching the PEB ImageBase and the entryPoint of the context.
+- *Stub.exe*\
+This is the final binary that will be build using the encrypted payload as resource file and later on decrypting the payload in memory and use the technique called "Process Hollowing" to run a new process with the payload.\
+It uses a variant Processing Hollowing, it creates another process, copy of itself in suspended mode, map's the encrypted file without unmapping the original, finally it load's a shellcode to fix relocations/imports and redirects the entry point to the mapped payload by patching the PEB ImageBase and the entryPoint of the context.\
 The shellcode is executed by writing it to the target process and creating a remote new thread while the process is suspended.
 
-- - build_64.bat
+  - build_64.bat\
 Since the Stub.exe needs to be build every time, this script takes care of encrypting the payload (using Builder.exe) and building the Stub project outputing the final binary.
 
 
